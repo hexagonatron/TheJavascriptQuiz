@@ -2,6 +2,12 @@ body{
     min-height: 100vh;
 }
 
+.timer {
+    position: absolute;
+    top: 0;
+    right: 0;
+}
+
 .hidden {
     display: none;
 }

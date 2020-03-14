@@ -48,8 +48,8 @@ const questionArray = [
         points: 10
     },
     {
-        name: "",
-        question: "",
+        name: "Question 3",
+        question: "What is ",
         choices: [
             {
                 option: 1,
@@ -94,5 +94,17 @@ const questionArray = [
         ],
         correctAnswer: 4,
         points: 10
+        
     },
 ];
+
+
+// typeof 2.e-4
+
+// (1/0) + (1/0)
+
+// 011 + 1
+
+//typeof(typeof 7)
+
+// (2 && -1) + (0 && -1)
