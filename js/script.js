@@ -26,6 +26,9 @@ buttonHandler = (event) => {
         acceptingAnswers = false;
 
         var userChoice = +event.target.dataset.option;
+        var correctAnswerBut = document.querySelector(`.choice-btn[data-option=\"${currQuestion.correctAnswer}\"]`);
+
+        console.log(correctAnswerBut);
 
         console.log(userChoice);
         if (userChoice === currQuestion.correctAnswer) {
@@ -34,11 +37,16 @@ buttonHandler = (event) => {
 
         } else {
             quizTimer.penalty(10);
-            //Button red
-            //highlight right answer
-        }
+            event.target.classList.toggle("btn-primary");
+            event.target.classList.toggle("btn-danger");
 
-        fillNextQuestion();
+            correctAnswerBut.classList.toggle("btn-primary");
+            correctAnswerBut.classList.toggle("btn-success");
+            
+            //highlight right answer
+            console.log("Wrong");
+        }
+        setTimeout(fillNextQuestion, 1000);
 
     }
 }
@@ -74,7 +82,7 @@ fillNextQuestion = () => {
 
             //button el
             var buttonEl = document.createElement("button");
-            buttonEl.classList.add("btn", "btn-primary", "col-12");
+            buttonEl.classList.add("btn", "btn-primary", "col-12", "choice-btn");
 
             //add on click handler
             buttonEl.addEventListener("click", buttonHandler);
