@@ -4,6 +4,9 @@ var duringQuizEl = document.querySelector(".during-quiz");
 var questionTitle = document.querySelector(".question-title");
 var questionText = document.querySelector(".question-text");
 var questionAnswers = document.querySelector(".question-answers");
+var afterQuizEl = document.querySelector(".after-quiz");
+var scoreModal = document.querySelector("score-modal");
+var highscoreTable = document.querySelector(".highscore-table");
 
 var timerSeconds = document.querySelector(".seconds");
 
@@ -19,6 +22,76 @@ var currQuestionIndex = 0;
 var totalQuestions;
 var currQuestion;
 
+// <tr>
+//       <th scope="row">1</th>
+//       <td>Mark</td>
+//       <td>Otto</td>
+//       <td>@mdo</td>
+//     </tr>
+
+//Fn declarations
+
+addHighScore = (name, score, date) => {
+    var scoreEntry = {
+        name: name,
+        score: score,
+        date: date
+    }
+
+    var highScoresObj = localStorage.getItem("scores");
+
+    if(highScoresObj){
+        highScoresObj = JSON.parse(highScoresObj);
+    } else {
+        highScoresObj = [];
+    }
+
+    highScoresObj.push(scoreEntry);
+
+    highScoresObj = JSON.stringify(highScoresObj);
+
+    localStorage.setItem("scores", highScoresObj);
+
+}
+
+//Fn to fill HS table
+fillHighscores = () => {
+
+    while(highscoreTable.childElementCount){
+        highscoreTable.removeChild(highscoreTable.childNodes[0]);
+    }
+
+    var highScoresObj = localStorage.getItem("scores");
+    if(highScoresObj){
+        highScoresObj = JSON.parse(highScoresObj);
+
+        highScoresObj.sort((a, b) => {return b.score - a.score});
+        
+        highScoresObj.forEach((entry, i) => {
+            var tableRow = document.createElement("tr");
+            
+            var tableRowH = document.createElement("th");
+            tableRowH.setAttribute("scope", "row");
+            tableRowH.innerText = i + 1;
+            tableRow.appendChild(tableRowH);
+
+            var tableRowName = document.createElement("td");
+            tableRowName.innerText = entry.name;
+            tableRow.appendChild(tableRowName);
+
+            var tableRowScore = document.createElement("td");
+            tableRowScore.innerText = entry.score;
+            tableRow.appendChild(tableRowScore);
+
+            var tableRowDate = document.createElement("td");
+            tableRowDate.innerText = entry.date;
+            tableRow.appendChild(tableRowDate);
+
+            highscoreTable.appendChild(tableRow);
+        });
+    }
+}
+
 //Button handler fn
 buttonHandler = (event) => {
 
@@ -33,6 +106,8 @@ buttonHandler = (event) => {
         console.log(userChoice);
         if (userChoice === currQuestion.correctAnswer) {
 
+            correctAnswerBut.classList.toggle("btn-primary");
+            correctAnswerBut.classList.toggle("btn-success");
             score = score + currQuestion.points;
 
         } else {
@@ -55,6 +130,8 @@ buttonHandler = (event) => {
 fillNextQuestion = () => {
     if (currQuestionIndex >= totalQuestions) {
         //if trying to advance past questions available trigger endgame
+        endGame();
+
 
         console.log("Finished!");
     } else {
@@ -113,6 +190,27 @@ fillNextQuestion = () => {
     }
 }
 
+endGame = () => {
+    var timeRemaining = quizTimer.currSecs;
+    quizTimer.stop();
+
+    
+    duringQuizEl.classList.add("hidden");
+    afterQuizEl.classList.remove("hidden");
+    scoreModal.classList.remove("hidden");
+    
+
+    //Calculate score
+
+
+}
+
+
+//End Fn declarations
+
+
+fillHighscores();
+
 //quiz timer object
 var quizTimer = {
     startSecs: 60,
@@ -168,4 +266,9 @@ startQuizBtn.addEventListener("click", (event) => {
     fillNextQuestion();
     duringQuizEl.classList.remove("hidden");
 
+});
+
+highscoreBtn.addEventListener("click", (event) => {
+    quizBeforeStartEl.classList.add("hidden");
+    afterQuizEl.classList.remove("hidden");
 });
