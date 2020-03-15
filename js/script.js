@@ -31,6 +31,14 @@ var currQuestion;
 
 //Fn declarations
 
+getDateString = () => {
+    var timeNow = new Date;
+
+    var dateString = `${timeNow.getDate()}/${timeNow.getMonth() + 1}/${timeNow.getFullYear()}`;
+
+    return dateString;
+}
+
 addHighScore = (name, score, date) => {
     var scoreEntry = {
         name: name,
@@ -197,17 +205,19 @@ endGame = () => {
     
     duringQuizEl.classList.add("hidden");
     afterQuizEl.classList.remove("hidden");
-    scoreModal.classList.remove("hidden");
-    
+    //scoreModal.classList.remove("hidden");
+
+    var finalScore = score + timeRemaining;
+
+
+    var playerName = prompt(`Thanks for playing! Your score is:\nQuestions answered correctly: ${score} + Time remaining: ${timeRemaining}\nTotal: ${finalScore}\n\nPlease enter your name`);
 
     //Calculate score
+    addHighScore(playerName, finalScore, getDateString());
 
+    fillHighscores();
 
 }
-
-
-//End Fn declarations
-
 
 fillHighscores();
 
@@ -222,8 +232,9 @@ var quizTimer = {
         var intervalFn = setInterval(() => {
             if (this.timerRunning) {
                 if (this.currSecs <= 0) {
+                    this.display();
                     this.timerRunning = false;
-                    //Trigger endgame
+                    endGame();
                 }
                 this.display();
                 this.currSecs -= 1;
