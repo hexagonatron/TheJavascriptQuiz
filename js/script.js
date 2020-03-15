@@ -13,6 +13,7 @@ var timerSeconds = document.querySelector(".seconds");
 //Selecting buttons
 var highscoreBtn = document.querySelector(".highscores-btn");
 var startQuizBtn = document.querySelector(".start-quiz-btn");
+var playAgainBtn = document.querySelector(".play-again-btn");
 
 //Setting initial game variables
 var quizRunning = false;
@@ -21,13 +22,6 @@ var score = 0;
 var currQuestionIndex = 0;
 var totalQuestions;
 var currQuestion;
-
-// <tr>
-//       <th scope="row">1</th>
-//       <td>Mark</td>
-//       <td>Otto</td>
-//       <td>@mdo</td>
-//     </tr>
 
 //Fn declarations
 
@@ -48,7 +42,7 @@ addHighScore = (name, score, date) => {
 
     var highScoresObj = localStorage.getItem("scores");
 
-    if(highScoresObj){
+    if (highScoresObj) {
         highScoresObj = JSON.parse(highScoresObj);
     } else {
         highScoresObj = [];
@@ -65,19 +59,19 @@ addHighScore = (name, score, date) => {
 //Fn to fill HS table
 fillHighscores = () => {
 
-    while(highscoreTable.childElementCount){
+    while (highscoreTable.childElementCount) {
         highscoreTable.removeChild(highscoreTable.childNodes[0]);
     }
 
     var highScoresObj = localStorage.getItem("scores");
-    if(highScoresObj){
+    if (highScoresObj) {
         highScoresObj = JSON.parse(highScoresObj);
 
-        highScoresObj.sort((a, b) => {return b.score - a.score});
-        
+        highScoresObj.sort((a, b) => { return b.score - a.score });
+
         highScoresObj.forEach((entry, i) => {
             var tableRow = document.createElement("tr");
-            
+
             var tableRowH = document.createElement("th");
             tableRowH.setAttribute("scope", "row");
             tableRowH.innerText = i + 1;
@@ -125,7 +119,7 @@ buttonHandler = (event) => {
 
             correctAnswerBut.classList.toggle("btn-primary");
             correctAnswerBut.classList.toggle("btn-success");
-            
+
             //highlight right answer
             console.log("Wrong");
         }
@@ -190,7 +184,7 @@ fillNextQuestion = () => {
             choiceButArray.splice(randIndex, 1);
         }
 
-        
+
         acceptingAnswers = true;
 
         //Increment curr question for next call
@@ -202,7 +196,7 @@ endGame = () => {
     var timeRemaining = quizTimer.currSecs;
     quizTimer.stop();
 
-    
+
     duringQuizEl.classList.add("hidden");
     afterQuizEl.classList.remove("hidden");
     //scoreModal.classList.remove("hidden");
@@ -231,13 +225,12 @@ var quizTimer = {
         this.timerRunning = true;
         var intervalFn = setInterval(() => {
             if (this.timerRunning) {
-                if (this.currSecs <= 0) {
-                    this.display();
-                    this.timerRunning = false;
-                    endGame();
-                }
-                this.display();
                 this.currSecs -= 1;
+                this.display();
+                if (this.currSecs <= 0) {
+                    this.timerRunning = false;
+                    setTimeout(endGame, 4);
+                }
             } else {
                 clearInterval(intervalFn);
             }
@@ -246,7 +239,8 @@ var quizTimer = {
     stop: function () {
         this.timerRunning = false;
     },
-    reset: function () {
+    reset: function (seconds) {
+        this.startSecs = seconds;
         this.currSecs = this.startSecs;
         this.display();
     },
@@ -261,25 +255,34 @@ var quizTimer = {
     }
 }
 
-//Attaching event listeners to buttons
-startQuizBtn.addEventListener("click", (event) => {
+startGame = () => {
     //reset score to 0
     score = 0;
     currQuestionIndex = 0;
     totalQuestions = questionArray.length;
+    timeAllowed = 15 * totalQuestions;
     quizBeforeStartEl.classList.add("hidden");
+    afterQuizEl.classList.add("hidden");
 
     //Countdown before start?
-
+    quizTimer.reset(timeAllowed);
     quizTimer.start();
     quizRunning = true;
 
     fillNextQuestion();
     duringQuizEl.classList.remove("hidden");
+}
 
+//Attaching event listeners to buttons
+startQuizBtn.addEventListener("click", (event) => {
+    startGame();
 });
 
 highscoreBtn.addEventListener("click", (event) => {
     quizBeforeStartEl.classList.add("hidden");
     afterQuizEl.classList.remove("hidden");
 });
+
+playAgainBtn.addEventListener("click", e => {
+    startGame();
+})

@@ -96,6 +96,27 @@ const questionArray = [
         points: 10
         
     },
+    {
+        name: "Foreign language section",
+        question: "Est-ce que vous parle francais?",
+        choices: [
+            {
+                option: 1,
+                choiceText: "Oui"
+            },
+            {
+                option: 2,
+                choiceText:"non"
+            },
+            {
+                option: 3,
+                choiceText: "Je ne sais pas"
+            }
+        ],
+        correctAnswer: 3,
+        points: 10
+        
+    },
 ];
 
 
