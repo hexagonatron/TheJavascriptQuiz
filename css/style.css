@@ -1,5 +1,10 @@
+html {
+    overflow: auto;
+}
+
 body{
     min-height: 100vh;
+    position: relative;
 }
 
 .timer {
@@ -21,4 +26,26 @@ body{
     left: 50%;
     transform: translate(-50%, -50%);
     z-index: 10;
+}
+.spacer-footer {
+    height: 40px;
+    width: 40px;
+    margin: 0;
+    margin-top: 2rem;
+    padding: 0;
+    box-sizing: border-box;
+    background-color: transparent;
+}
+
+footer {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    background-color: rgb(46, 46, 46);
+}
+
+@media only screen and (max-width: 730px) {
+    .timer{
+        position: relative;
+    }
 }

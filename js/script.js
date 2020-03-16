@@ -180,7 +180,7 @@ fillNextQuestion = () => {
 
         //fill page elements
         questionTitle.innerText = currQuestion.name;
-        questionText.innerText = currQuestion.question;
+        questionText.innerHTML = currQuestion.question;
 
         //remove previous buttons
         while (questionAnswers.childElementCount) {

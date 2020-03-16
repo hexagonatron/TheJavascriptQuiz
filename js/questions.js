@@ -1,119 +1,123 @@
 const questionArray = [
     {
         name: "Question 1",
-        question: "This is a test question. What is the answer?",
+        question: "Which of these is NOT a valid return value for the \"typeof\" operator?",
         choices: [
             {
                 option: 1,
-                choiceText: "This is choice 1"
+                choiceText: "'undefined'"
             },
             {
                 option: 2,
-                choiceText:"This is another choice"
+                choiceText:"'function'"
             },
             {
                 option: 3,
-                choiceText: "This is the third choice"
+                choiceText: "'array'"
             },
             {
                 option: 4,
-                choiceText: "Maybe this is the right answer"
+                choiceText: "'object'"
             }
         ],
-        correctAnswer: 1,
+        correctAnswer: 3,
         points: 10
     },
     {
         name: "Question 2",
-        question: "What is the square root of 2049?",
+        question: "In Javascript, what would the value of the variable answer be in the following code snippit?\n<pre class=\"mt-3\">var answer = Infinity - Infinity;</pre>",
         choices: [
             {
                 option: 1,
-                choiceText: "45.265881"
+                choiceText: "0"
             },
             {
                 option: 2,
-                choiceText:"42"
+                choiceText:"NaN"
             },
             {
                 option: 3,
-                choiceText: "Foo"
+                choiceText: "Infinity"
             },
             {
                 option: 4,
-                choiceText: "Bar"
+                choiceText: "undefined"
             }
         ],
-        correctAnswer: 1,
+        correctAnswer: 2,
         points: 10
     },
     {
         name: "Question 3",
-        question: "What is ",
+        question: "In Javascript, what would the value of the variable answer be in the following code snippit?\n<pre class=\"mt-3\">var answer = typeof NaN;</pre>",
         choices: [
             {
                 option: 1,
-                choiceText: "This is choice 1"
+                choiceText: "'number'"
             },
             {
                 option: 2,
-                choiceText:"This is another choice"
+                choiceText:"'string'"
             },
             {
                 option: 3,
-                choiceText: "This is the third choice"
+                choiceText: "'object'"
             },
             {
                 option: 4,
-                choiceText: "Maybe this is the right answer"
+                choiceText: "'undefined'"
             }
         ],
         correctAnswer: 1,
         points: 10
     },
     {
-        name: "What is 2+2?",
-        question: "",
+        name: "Question 4",
+        question: "In Javascript, what would the value of the variable answer be in the following code snippit?\n<pre class=\"mt-3\">var answer = 011 + 1;</pre>",
         choices: [
             {
                 option: 1,
-                choiceText: "1"
+                choiceText: "'0111'"
             },
             {
                 option: 2,
-                choiceText:"Potato"
+                choiceText:"12"
             },
             {
                 option: 3,
-                choiceText: "5 (for very large values of 2)"
+                choiceText: "10"
             },
             {
                 option: 4,
-                choiceText: "4"
+                choiceText: "NaN"
             }
         ],
-        correctAnswer: 4,
+        correctAnswer: 3,
         points: 10
         
     },
     {
-        name: "Foreign language section",
-        question: "Est-ce que vous parle francais?",
+        name: "Question 5",
+        question: "In Javascript, what would the value of the variable answer be in the following code snippit?\n<pre class=\"mt-3\">var answer = typeof 2.e-3;</pre>",
         choices: [
             {
                 option: 1,
-                choiceText: "Oui"
+                choiceText: "'string'"
             },
             {
                 option: 2,
-                choiceText:"non"
+                choiceText:"'number'"
             },
             {
                 option: 3,
-                choiceText: "Je ne sais pas"
-            }
+                choiceText: "'object'"
+            },
+            {
+                option: 3,
+                choiceText: "'NaN'"
+            },
         ],
-        correctAnswer: 3,
+        correctAnswer: 2,
         points: 10
         
     },
