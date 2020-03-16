@@ -122,14 +122,3 @@ const questionArray = [
         
     },
 ];
-
-
-// typeof 2.e-4
-
-// (1/0) + (1/0)
-
-// 011 + 1
-
-//typeof(typeof 7)
-
-// (2 && -1) + (0 && -1)
