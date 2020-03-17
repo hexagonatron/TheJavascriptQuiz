@@ -5,7 +5,6 @@ var questionTitle = document.querySelector(".question-title");
 var questionText = document.querySelector(".question-text");
 var questionAnswers = document.querySelector(".question-answers");
 var afterQuizEl = document.querySelector(".after-quiz");
-var scoreModal = document.querySelector("score-modal");
 var highscoreTable = document.querySelector(".highscore-table");
 
 var timerSeconds = document.querySelector(".seconds");
